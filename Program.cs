@@ -16,15 +16,23 @@ List<Word> words = [
   new Word("stor", "large", "swedish", "english")
 ];
 
+
+// referera till ett ord (hem):
+Console.WriteLine(words[1].WordOut);
+
+
+
+
+
+
+
+
+
+
 class Word(string wordIn, string wordOut, string languageIn, string languageOut)
 {
   public string WordIn { get; } = wordIn;
-  public string WordOUt { get; } = wordOut;
+  public string WordOut { get; } = wordOut;
   public string LanguageIn { get; } = languageIn;
   public string LanguageOut { get; } = languageOut;
 }
-
-
-
-
-
