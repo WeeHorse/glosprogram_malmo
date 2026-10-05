@@ -12,17 +12,23 @@ List<string> words = [
 List<Word> words = [
   new Word("hus", "house", "swedish", "english"),
   new Word("hem", "home", "swedish", "english"),
-  new Word("stor", "big", "swedish", "english"),
-  new Word("stor", "large", "swedish", "english")
+  new Word("stor", "big", "swedish", "english")
+  //new Word("stor", "large", "swedish", "english")
 ];
 
 
-// referera till ett ord (hem):
+// referera till ett ord ur vår array (hem på engelska):
 Console.WriteLine(words[1].WordOut);
 
+// Dictionary
 
+Dictionary<string, Word> swedishToEnglish = words.ToDictionary(
+  word => word.WordIn, // nyckeln
+  word => word          // värdet, typiskt hela objektet (referensen)
+);
 
-
+// referera till ett ord ur vår dictionary
+Console.WriteLine(swedishToEnglish["hem"].WordOut);
 
 
 
