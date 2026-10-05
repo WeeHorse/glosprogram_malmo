@@ -27,43 +27,89 @@ foreach (string filePath in filePaths)
 // UC2: visar att orden från alla filer har lästs in (t.ex. 197 ord från 2 filer)
 Console.WriteLine($"{words.Count} ord inlästa från {filePaths.Length} filer");
 
+// UC3: plockar ut alla språkpar som finns bland orden, utan dubbletter
+// Order sorterar i bokstavsordning, så att samma nummer alltid betyder samma språkpar
+List<string> languagePairs = words
+  .Select(word => word.LanguagePair)
+  .Distinct()
+  .Order()
+  .ToList();
 
-// Dictionary
-// innehåller just nu ord från alla ordlistor, trots namnet (ersätts i UC4)
-
-Dictionary<string, List<Word>> swedishToEnglish = words
-.GroupBy(word => word.WordIn, StringComparer.OrdinalIgnoreCase) // skapar lista baserat på gemensam nyckel (i e stor => big, large)
-.ToDictionary(
-  group => group.Key, // nyckeln
-  group => group.ToList(),          // värdet, typiskt hela objektet (referensen)
-  StringComparer.OrdinalIgnoreCase
-);
-
-
+// UC5: yttre loop, så att användaren kan komma tillbaka hit och välja ett nytt språkpar med :byt
 while (true)
 {
-
-  Console.WriteLine("Ange vilket ord du vill översätta");
-  string? wordToTranslate = Console.ReadLine();
-
-  // om ordet finns som nyckel i dictionaryt
-  if (swedishToEnglish.ContainsKey(wordToTranslate!))
+  // UC3: skriver ut språkparen som en numrerad lista som börjar på 1
+  Console.WriteLine("Språkpar:");
+  for (int i = 0; i < languagePairs.Count; i++)
   {
-    // loopa ut synonymer
-    foreach (Word word in swedishToEnglish[wordToTranslate!])
+    Console.WriteLine($"{i + 1}. {languagePairs[i]}");
+  }
+
+
+  // UC4: frågar efter ett nummer tills användaren har valt ett språkpar som finns
+  string chosenLanguagePair = "";
+  while (true)
+  {
+    Console.WriteLine("Välj språkpar genom att skriva dess nummer");
+    string? choice = Console.ReadLine();
+
+    // UC4: inmatningen har tagit slut (t.ex. Ctrl+D), annars skulle frågan upprepas i all oändlighet
+    if (choice == null)
     {
-      Console.WriteLine(word.WordOut);
+      return;
     }
+
+    // UC4: TryParse försöker göra om texten till ett tal och ger false om det inte går (t.ex. "abc")
+    if (int.TryParse(choice, out int chosenNumber) && chosenNumber >= 1 && chosenNumber <= languagePairs.Count)
+    {
+      chosenLanguagePair = languagePairs[chosenNumber - 1]; // listan börjar på 0, men numren börjar på 1
+      break;
+    }
+
+    Console.WriteLine($"Ogiltigt val, skriv ett nummer mellan 1 och {languagePairs.Count}");
   }
-  else
+
+  Console.WriteLine($"Du översätter nu {chosenLanguagePair}");
+
+
+  // Dictionary
+
+  // UC4: ersätter swedishToEnglish och fungerar för alla språkpar, eftersom bara orden i det valda paret tas med
+  Dictionary<string, List<Word>> translations = words
+    .Where(word => word.LanguagePair == chosenLanguagePair)
+    .GroupBy(word => word.WordIn, StringComparer.OrdinalIgnoreCase) // skapar lista baserat på gemensam nyckel (i e stor => big, large)
+    .ToDictionary(
+      group => group.Key, // nyckeln
+      group => group.ToList(),          // värdet, typiskt hela objektet (referensen)
+      StringComparer.OrdinalIgnoreCase
+    );
+
+
+  while (true)
   {
-    Console.WriteLine("Ordet finns inte i någon ordlista");
+
+    Console.WriteLine("Ange vilket ord du vill översätta (skriv :byt för att byta språkpar)"); // UC5: berättar om kommandot
+    string? wordToTranslate = Console.ReadLine();
+
+    // UC5: break lämnar bara den inre loopen, så programmet hoppar tillbaka till valet av språkpar
+    if (wordToTranslate == ":byt")
+    {
+      break;
+    }
+
+    // om ordet finns som nyckel i dictionaryt
+    if (translations.ContainsKey(wordToTranslate!))
+    {
+      // loopa ut synonymer
+      foreach (Word word in translations[wordToTranslate!])
+      {
+        Console.WriteLine(word.WordOut);
+      }
+    }
+    else
+    {
+      Console.WriteLine($"Ordet finns inte i ordlistan för {chosenLanguagePair}"); // UC4: visar vilket par som söktes i
+    }
+
   }
-
 }
-
-
-
-
-
-

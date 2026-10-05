@@ -6,7 +6,7 @@
 `Program.cs`, i huvudloopen.
 
 ## Klart när
-- [ ] Ett kommando, till exempel `:byt`, tar användaren tillbaka till valet av språkpar.
+- [x] Ett kommando, till exempel `:byt`, tar användaren tillbaka till valet av språkpar.
 
 ## Beroenden
 UC4

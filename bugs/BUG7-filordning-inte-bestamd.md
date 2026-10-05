@@ -22,4 +22,4 @@ I UC3 ska språkparen visas som en numrerad lista, och i UC4 väljer användaren
 `Program.cs`, vid `Directory.GetFiles(...)`.
 
 ## Åtgärdas i
-UC3 (språkparen ska visas i samma ordning varje gång)
+UC3. Åtgärdad: språkparen sorteras i bokstavsordning med `Order()`, så numren är desamma oavsett i vilken ordning filerna läses. Eftersom man översätter i ett språkpar i taget (UC4) kommer översättningarna i samma ordning som i filen.

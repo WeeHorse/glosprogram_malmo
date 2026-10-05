@@ -6,9 +6,9 @@
 `Program.cs`, där dictionaryt `swedishToEnglish` byggs och i huvudloopen.
 
 ## Klart när
-- [ ] Variabeln `swedishToEnglish` är ersatt av en struktur som fungerar för alla språkpar.
-- [ ] Uppslagningen sker bara i det valda paret.
-- [ ] Ett ogiltigt val ger ett felmeddelande och användaren får välja igen.
+- [x] Variabeln `swedishToEnglish` är ersatt av en struktur som fungerar för alla språkpar.
+- [x] Uppslagningen sker bara i det valda paret.
+- [x] Ett ogiltigt val ger ett felmeddelande och användaren får välja igen.
 
 ## Beroenden
 UC3

@@ -19,4 +19,4 @@ Texten skrevs på engelska. Enligt kodstandarden ska texter som visas för anvä
 `Program.cs`, i `else`-grenen i huvudloopen.
 
 ## Åtgärdas i
-Ingen use case. Rättad direkt: meddelandet är nu `Ordet finns inte i någon ordlista`.
+Ingen use case. Rättad direkt: meddelandet blev `Ordet finns inte i någon ordlista`. Sedan UC4 är det `Ordet finns inte i ordlistan för swedish → english` (med det valda språkparet).

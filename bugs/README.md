@@ -10,4 +10,4 @@ Kända buggar i glosprogrammet. Varje bugg har en egen fil med steg för att åt
 | 4 | [Filnamn med flera bindestreck läses in utan varning](BUG4-filnamn-med-flera-bindestreck.md) | UC7 |
 | 5 | [Krasch när mappen wordlists inte hittas](BUG5-krasch-nar-mappen-saknas.md) | UC7 |
 | 6 | [Felmeddelandet visas på engelska](BUG6-felmeddelande-pa-engelska.md) | Åtgärdad |
-| 7 | [Filerna läses inte i en bestämd ordning](BUG7-filordning-inte-bestamd.md) | UC3 |
+| 7 | [Filerna läses inte i en bestämd ordning](BUG7-filordning-inte-bestamd.md) | Åtgärdad i UC3 |

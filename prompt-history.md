@@ -60,3 +60,22 @@ Skapade den här filen.
 > Från och med nu, underhåll denna kontinuerligt. (Lägg in detta i din system prompt)
 
 Systemprompten går inte att ändra. Regeln lades i stället i `CLAUDE.md` under rubriken *Prompthistorik*, eftersom den filen läses in i början av varje session.
+
+## 10. UC3, UC4 och UC5
+
+> Kan du bygga UC3, 4 och 5?
+
+Byggdes ett steg i taget, och varje steg kördes och testades innan nästa påbörjades. Testerna med extra ordlistor kördes i en kopia av projektet.
+
+- **UC3:** `Word` fick propertyn `LanguagePair` (t.ex. `swedish → english`). Språkparen plockas ut ur orden, sorteras i bokstavsordning och visas som en numrerad lista. Sorteringen åtgärdar BUG7.
+- **UC4:** användaren väljer ett nummer, och ett ogiltigt val ger ett felmeddelande. `swedishToEnglish` ersattes av `translations`, som bara innehåller orden i det valda paret. Ctrl+D vid valet avslutar programmet, annars skulle frågan upprepas i all oändlighet.
+- **UC5:** valet och översättningsloopen ligger i en yttre loop, och `:byt` går tillbaka till valet av språkpar.
+
+Specs, README och bugs uppdaterades så att de stämmer med koden.
+
+## 11. Kontroll av README
+
+> Är README uppdaterad?
+
+Exemplet i README kördes och utskriften jämfördes rad för rad. Den stämde. Meningen om stora och små bokstäver hade hamnat under *Byta språkpar* och flyttades tillbaka till avsnittet om att översätta ord. README säger nu också att `:byt` måste skrivas med små bokstäver.
+
