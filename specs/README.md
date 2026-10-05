@@ -11,5 +11,6 @@ Use cases för att göra glosprogrammet generiskt, så att språken bestäms av 
 | 5 | [Byt språkpar under körning](UC5-byt-sprakpar.md) | UC4 |
 | 6 | [Översätt åt båda hållen](UC6-oversatt-at-bada-hallen.md) | UC4 |
 | 7 | [Hantera felaktiga filer och felaktig inmatning](UC7-felhantering.md) | UC2 |
+| 8 | [Extrapolera översättningar via ett gemensamt språk](UC8-extrapolera-oversattningar.md) | UC6 |
 
-UC1–UC4 gör programmet generiskt. UC5–UC7 är förbättringar ovanpå det.
+UC1–UC4 gör programmet generiskt. UC5–UC8 är förbättringar ovanpå det.

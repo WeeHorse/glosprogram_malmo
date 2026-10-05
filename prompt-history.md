@@ -79,3 +79,33 @@ Specs, README och bugs uppdaterades så att de stämmer med koden.
 
 Exemplet i README kördes och utskriften jämfördes rad för rad. Den stämde. Meningen om stora och små bokstäver hade hamnat under *Byta språkpar* och flyttades tillbaka till avsnittet om att översätta ord. README säger nu också att `:byt` måste skrivas med små bokstäver.
 
+
+## 12. Förslag på UC6
+
+> Om du skulle göra UC6 för att översätta åt båda håll, hur skulle du göra den ändringen?
+
+Ingen kod ändrades. Förslaget är att skapa ett omvänt `Word` för varje rad i inläsningsloopen, så att `english → swedish` kommer med automatiskt i språkparen och i `translations`. En risk togs upp: om det även finns en `english-swedish.csv` blir orden dubbletter.
+
+## 13. UC6 genom att vända nyckeln
+
+> Du skapar då dubbelt så många instanser av Word. Om du skulle vända nyckeln i GroupBy Dictionary istället, vad skulle du mer behöva ändra då?
+
+Ingen kod ändrades. Om nyckeln vänds i stället för att orden dubbleras måste fyra ställen ändras: `Word` behöver ett omvänt språkpar, och språkparen behöver ta med det. Dessutom måste filtret med `Where`, nyckeln i `GroupBy` och utskriften av översättningen alla veta vilket håll som gäller. Svaret jämförde de två lösningarna.
+
+## 14. Bygg UC6
+
+> Okej då, kör dubbla Word
+
+UC6 byggdes med dubbla `Word`. I inläsningsloopen skapas nu ett omvänt `Word` för varje rad, så att `english → swedish` och `spanish → swedish` kommer med automatiskt. Programmet kördes och testades: `big` och `LARGE` ger `stor`, och både `house` och `building` ger `hus`. Riktningen `swedish → spanish` fungerar som innan. Rutorna i UC6-specen bockades av. README uppdaterades med de nya språkparen, de nya numren, antalet ord (394), ett nytt exempel och den nya begränsningen: filer åt båda hållen ger dubbletter.
+
+## 15. Spec för UC8
+
+> Kan du skapa en UC8 som innebär att vi vill kunna extrapolera översättningar?
+
+Ingen kod ändrades. En ny spec, `specs/UC8-extrapolera-oversattningar.md`, skapades. Den beskriver hur programmet ska kunna översätta mellan två språk utan egen ordlista genom att gå via ett gemensamt språk, till exempel `house → hus → casa`. Specen bygger på UC6 och kräver bara ett mellanled. UC8 lades till i tabellen i `specs/README.md`.
+
+## 16. Spansk-italiensk ordlista
+
+> Kan du generera en spansk-italiensk ordlista också?
+
+`wordlists/spanish-italian.csv` skapades med 100 rader. Den innehåller alla 97 spanska ord från `swedish-spanish.csv`, så att UC8 senare kan översätta till exempel `swedish → italian` via spanska. Några ord har synonymer, till exempel `coche,macchina` och `coche,auto`. Programmet kördes: `594 ord inlästa från 3 filer`, och paren `spanish → italian` och `italian → spanish` visas och fungerar (`perro` ger `cane`, `bello` ger `bonito` och `hermoso`). README uppdaterades med den nya filen, antalet ord och de nya numren på språkparen.

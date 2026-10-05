@@ -6,8 +6,8 @@
 `Program.cs`, i inläsningen (se UC2).
 
 ## Klart när
-- [ ] Paret `english → swedish` visas i listan från UC3, trots att det bara finns en `swedish-english.csv`.
-- [ ] Synonymer fungerar åt båda hållen: `big` och `large` ger båda `stor`.
+- [x] Paret `english → swedish` visas i listan från UC3, trots att det bara finns en `swedish-english.csv`.
+- [x] Synonymer fungerar åt båda hållen: `big` och `large` ger båda `stor`.
 
 ## Beroenden
 UC4

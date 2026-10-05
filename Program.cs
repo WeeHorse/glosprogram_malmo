@@ -21,6 +21,9 @@ foreach (string filePath in filePaths)
   {
     string[] wordPair = line.Split(",");
     words.Add(new Word(wordPair[0], wordPair[1], languageIn, languageOut)); // UC1: språken kommer från filnamnet i stället för hårdkodad text
+
+    // UC6: lägger också till ordet åt andra hållet, så att samma fil räcker för båda riktningarna (house => hus)
+    words.Add(new Word(wordPair[1], wordPair[0], languageOut, languageIn));
   }
 }
 
