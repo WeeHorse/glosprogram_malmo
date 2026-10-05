@@ -1,25 +1,25 @@
 ﻿Console.WriteLine("Glosprogram");
 
-/*
-List<string> words = [
-  "hus", "house",     // jämna index => svenskt uppslag, udda => engelsk översättning
-  "hem", "home",
-  "stor", "big",      // synonymer får hanteras i en loop
-  "stor", "large"
-];
-*/
-
 List<Word> words = [];
 
+// UC1: sökvägen ligger i en variabel så att vi kan läsa språken ur filnamnet
+string filePath = "./wordlists/swedish-english.csv";
+
+// UC1: plockar ut filnamnet utan mapp och ändelse (./wordlists/swedish-english.csv => swedish-english)
+string fileName = Path.GetFileNameWithoutExtension(filePath);
+
+// UC1: delar filnamnet vid bindestrecket (swedish-english => ["swedish", "english"])
+string[] languages = fileName.Split("-");
+string languageIn = languages[0];
+string languageOut = languages[1];
+
 // fyll listan med ord från disk (wordlists)
-foreach (string line in File.ReadAllLines("./wordlists/swedish-english.csv"))
+foreach (string line in File.ReadAllLines(filePath)) // UC1: använder variabeln filePath
 {
   string[] wordPair = line.Split(",");
-  words.Add(new Word(wordPair[0], wordPair[1], "swedish", "english"));
+  words.Add(new Word(wordPair[0], wordPair[1], languageIn, languageOut)); // UC1: språken kommer från filnamnet i stället för hårdkodad text
 }
 
-// referera till ett ord ur vår array (hem på engelska):
-//Console.WriteLine(words[1].WordOut);
 
 // Dictionary
 
@@ -31,8 +31,6 @@ Dictionary<string, List<Word>> swedishToEnglish = words
   StringComparer.OrdinalIgnoreCase
 );
 
-// referera till ett ord ur vår dictionary
-//Console.WriteLine(swedishToEnglish["hem"][0].WordOut);
 
 while (true)
 {
@@ -61,10 +59,3 @@ while (true)
 
 
 
-class Word(string wordIn, string wordOut, string languageIn, string languageOut)
-{
-  public string WordIn { get; } = wordIn;
-  public string WordOut { get; } = wordOut;
-  public string LanguageIn { get; } = languageIn;
-  public string LanguageOut { get; } = languageOut;
-}
