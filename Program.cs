@@ -12,23 +12,51 @@ List<string> words = [
 List<Word> words = [
   new Word("hus", "house", "swedish", "english"),
   new Word("hem", "home", "swedish", "english"),
-  new Word("stor", "big", "swedish", "english")
-  //new Word("stor", "large", "swedish", "english")
+  new Word("stor", "big", "swedish", "english"),
+  new Word("stor", "large", "swedish", "english"),
+  new Word("stor", "huge", "swedish", "english"),
+  new Word("stor", "volymous", "swedish", "english")
+  // stor => big, large
 ];
 
 
 // referera till ett ord ur vår array (hem på engelska):
-Console.WriteLine(words[1].WordOut);
+//Console.WriteLine(words[1].WordOut);
 
 // Dictionary
 
-Dictionary<string, Word> swedishToEnglish = words.ToDictionary(
-  word => word.WordIn, // nyckeln
-  word => word          // värdet, typiskt hela objektet (referensen)
+Dictionary<string, List<Word>> swedishToEnglish = words
+.GroupBy(word => word.WordIn, StringComparer.OrdinalIgnoreCase) // skapar lista baserat på gemensam nyckel (i e stor => big, large)
+.ToDictionary(
+  group => group.Key, // nyckeln
+  group => group.ToList(),          // värdet, typiskt hela objektet (referensen)
+  StringComparer.OrdinalIgnoreCase
 );
 
 // referera till ett ord ur vår dictionary
-Console.WriteLine(swedishToEnglish["hem"].WordOut);
+//Console.WriteLine(swedishToEnglish["hem"][0].WordOut);
+
+while (true)
+{
+
+  Console.WriteLine("Ange vilket ord du vill översätta");
+  string? wordToTranslate = Console.ReadLine();
+
+  // IF IT contains the key
+  if (swedishToEnglish.ContainsKey(wordToTranslate!))
+  {
+    // loopa ut synonymer
+    foreach (var word in swedishToEnglish[wordToTranslate!])
+    {
+      Console.WriteLine(word.WordOut);
+    }
+  }
+  else
+  {
+    Console.WriteLine("This word does not exist in this dictionary");
+  }
+
+}
 
 
 
